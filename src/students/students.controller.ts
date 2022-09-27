@@ -10,30 +10,23 @@ import { ApiBody, ApiHeader, ApiParam, ApiResponse, ApiTags } from '@nestjs/swag
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) { }
 
-  @ApiHeader({ name: 'Authorization', description: StudentsConstants.AUTHORIZATION_HEADER })
   @ApiResponse({ status: HttpStatus.CREATED, description: StudentsConstants.RECORD_CREATED_SUCCESS })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: StudentsConstants.RECORD_CREATED_ERROR })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: StudentsConstants.UNAUTHORIZED_SERVICE })
   @ApiBody({ type: CreateStudentDto })
   @Post()
   create(@Body() createStudentDto: CreateStudentDto) {
-    this.studentsService.create(createStudentDto);
+    return this.studentsService.create(createStudentDto);
   }
 
-  @ApiHeader({ name: 'Authorization', description: StudentsConstants.AUTHORIZATION_HEADER })
   @ApiResponse({ status: HttpStatus.OK, description: StudentsConstants.RECORD_RETRIEVED_SUCCESS })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: StudentsConstants.RECORD_RETRIEVED_ERROR })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: StudentsConstants.UNAUTHORIZED_SERVICE })
   @Get()
   findAll() {
-    try {
-      return this.studentsService.findAll();
-    } catch {
-      return new HttpException(StudentsConstants.RECORD_RETRIEVED_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.studentsService.findAll();
   }
 
-  @ApiHeader({ name: 'Authorization', description: StudentsConstants.AUTHORIZATION_HEADER })
   @ApiResponse({ status: HttpStatus.OK, description: StudentsConstants.RECORD_RETRIEVED_SUCCESS })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: StudentsConstants.RECORD_RETRIEVED_ERROR })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: StudentsConstants.RECORD_RETRIEVED_NOT_FOUND })
@@ -41,14 +34,9 @@ export class StudentsController {
   @ApiParam({ name: 'id' })
   @Get(':id')
   findOne(@Param('id') id: string) {
-    try {
-      return this.studentsService.findOne(id);
-    } catch {
-      return new HttpException(StudentsConstants.RECORD_RETRIEVED_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.studentsService.findOne(id);
   }
 
-  @ApiHeader({ name: 'Authorization', description: StudentsConstants.AUTHORIZATION_HEADER })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: StudentsConstants.RECORD_RETRIEVED_NOT_FOUND })
   @ApiResponse({ status: HttpStatus.OK, description: StudentsConstants.RECORD_UPDATED_SUCCESS })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: StudentsConstants.RECORD_UPDATED_SUCCESS })
@@ -57,14 +45,9 @@ export class StudentsController {
   @ApiBody({ type: UpdateStudentDto })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {
-    try {
-      return this.studentsService.update(id, updateStudentDto);
-    } catch {
-      return new HttpException(StudentsConstants.RECORD_RETRIEVED_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.studentsService.update(id, updateStudentDto);
   }
 
-  @ApiHeader({ name: 'Authorization', description: StudentsConstants.AUTHORIZATION_HEADER })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: StudentsConstants.RECORD_RETRIEVED_NOT_FOUND })
   @ApiResponse({ status: HttpStatus.OK, description: StudentsConstants.RECORD_DELETED_SUCCESS })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: StudentsConstants.RECORD_DELETED_ERROR })
@@ -72,10 +55,6 @@ export class StudentsController {
   @ApiParam({ name: 'id' })
   @Delete(':id')
   remove(@Param('id') id: string) {
-    try {
-      return this.studentsService.remove(id);
-    } catch {
-      return new HttpException(StudentsConstants.RECORD_DELETED_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.studentsService.remove(id);
   }
 }

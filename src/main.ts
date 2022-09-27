@@ -8,10 +8,16 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
     .setTitle('Students API')
+    .addSecurity('ApiKeyAuth',{
+      type: 'apiKey', 
+      in: 'header', 
+      name: 'Authorization' 
+    })
+    .addSecurityRequirements('ApiKeyAuth')
     .setDescription('Students API Documentation')
     .setVersion('1.0.0')
     .addTag('Api Tag')    
-    .addServer('/dev') //TODO: process.env.environment 
+    .addServer('/dev') //TODO: process.env.environment     
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
