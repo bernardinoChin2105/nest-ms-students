@@ -27,6 +27,21 @@ You can test an online version [here](https://ji8ava28e8.execute-api.us-east-1.a
 
 ## Setup
 
+### Requirements
+- nodejs installed on your computer. Download [here](https://nodejs.org/en/download/).
+- nestjs installed on your computer.
+```
+
+$ npm install -g @nestjs/cli
+
+```
+- Serverless framework installed on your computer
+```
+
+$ npm install -g serverless
+
+```
+
 ### Restore packages
 Clone the repository to your computer and run the next commands to **restore the node packages and plugins**.
 ```
