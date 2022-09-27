@@ -63,7 +63,15 @@ Open the serverless.yml file and change the following properties based on what y
 ![provider.environment.IS_OFFLINE](https://i.imgur.com/ho7aGrI.png)
 
 ## Run
-Start the project locally. The next command will initialize the local dynamoDb instance as well as an instance of your project.
+
+Install de local instance of dynamoDB
+```
+
+$ serverless dynamodb install
+
+```
+
+Start the project locally. The next commands will initialize the local dynamoDb instance as well as an instance of your project.
 ```
 
 $ serverless offline start
@@ -74,6 +82,7 @@ You should be able to see your instance at https://localhost:3000
 ## Deploy
 Run the next command to deploy your project to your AWS account
 ```
+
 $ serverless deploy
 
 ```
