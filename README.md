@@ -8,6 +8,7 @@ You can test an online version [here](https://ji8ava28e8.execute-api.us-east-1.a
 
 ## Stack
 - [Node js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [AWS DynamoDB](https://aws.amazon.com/es/dynamodb/?trk=e48fec2f-eaa4-4036-9c22-7fa1d1f49d3a&sc_channel=ps&s_kwcid=AL!4422!3!536324225757!e!!g!!dynamodb&ef_id=CjwKCAjwm8WZBhBUEiwA178UnOp6B8YjBEAt5Ii5Ayfrb50y3wsq2mHpB7vslPVxcE3q61QvFlszLRoCPasQAvD_BwE:G:s&s_kwcid=AL!4422!3!536324225757!e!!g!!dynamodb)
 - [NestJs Framework](https://nestjs.com/)
 - [Serverless Framework](https://www.serverless.com/)
