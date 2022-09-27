@@ -1,73 +1,90 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Students API
+============
+This is a demo project powered by node, nestjs, and serverless framework that provides the services for creating, retrieving, updating, and deleting students from a dynamo database (AWS). 
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Using the benefits of serverless framework the project is deployed with minimal effort and serverless does the magic, updating the product version in AWS S3, putting the code in AWS Lambda functions and Generating the AWS Api-Gateway for you.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+You can test an online version [here](https://ji8ava28e8.execute-api.us-east-1.amazonaws.com/dev/api).
 
-## Description
+## Stack
+- [Node js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [AWS DynamoDB](https://aws.amazon.com/es/dynamodb/?trk=e48fec2f-eaa4-4036-9c22-7fa1d1f49d3a&sc_channel=ps&s_kwcid=AL!4422!3!536324225757!e!!g!!dynamodb&ef_id=CjwKCAjwm8WZBhBUEiwA178UnOp6B8YjBEAt5Ii5Ayfrb50y3wsq2mHpB7vslPVxcE3q61QvFlszLRoCPasQAvD_BwE:G:s&s_kwcid=AL!4422!3!536324225757!e!!g!!dynamodb)
+- [NestJs Framework](https://nestjs.com/)
+- [Serverless Framework](https://www.serverless.com/)
+- [AWS Lambda](https://aws.amazon.com/es/lambda/)
+- [AWS S3](https://aws.amazon.com/es/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Categories=categories%23storage&trk=cb95ec94-ab1e-4e8e-b98f-10f4c919842a&sc_channel=ps&s_kwcid=AL!4422!3!536393996125!e!!g!!aws%20s3&ef_id=CjwKCAjwm8WZBhBUEiwA178UnMsIJObGmW7YErc7aUuQEFMpYTQ5hBHVCwrRvz2Rg6W8Ge0VSTynlBoCB8AQAvD_BwE:G:s&s_kwcid=AL!4422!3!536393996125!e!!g!!aws%20s3)
+- [AWS Api-Gateway](https://aws.amazon.com/es/api-gateway/)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
+- POST /students (Create a new student)
+- GET /students (Retrieve all students)
+- GET /students/{id} (Retrieve one student given an id)
+- PATCH /students (Update a student)
+- DELETE /students (Remove a student)
 
-## Installation
+![online version](https://i.imgur.com/XhanG3j.png)
 
-```bash
+## Setup
+
+### Requirements
+- nodejs installed on your computer. Download [here](https://nodejs.org/en/download/).
+- nestjs installed on your computer.
+```
+
+$ npm install -g @nestjs/cli
+
+```
+- Serverless framework installed on your computer
+```
+
+$ npm install -g serverless
+
+```
+
+### Restore packages
+Clone the repository to your computer and run the next commands to **restore the node packages and plugins**.
+```
+
 $ npm install
+
 ```
 
-## Running the app
+### AWS configuration
+You need to **configure your AWS credentials** before you run your project for the first time. If you need help with the process of configuration you could get help from the official AWS documentation [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). I seriously encourage you to create a user specifically for your project and you need to take into consideration adding an AdministratorAccess policy to it. 
 
-```bash
-# development
-$ npm run start
+### Serverless configuration
+Open the serverless.yml file and change the following properties based on what you need:
 
-# watch mode
-$ npm run start:dev
+**provider.stage**: Needed for resolving the name of the database to be created and consumed on AWS DynamoDb service.
+![provider.stage](https://i.imgur.com/cQCCpPq.png)
 
-# production mode
-$ npm run start:prod
+**provider.environment.IS_OFFLINE**: Set true if you want your project to work with dynamoDB local instance. 
+![provider.environment.IS_OFFLINE](https://i.imgur.com/ho7aGrI.png)
+
+## Run
+
+Install de local instance of dynamoDB
 ```
 
-## Test
+$ serverless dynamodb install
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+Start the project locally. The next commands will initialize the local dynamoDb instance as well as an instance of your project.
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+$ serverless offline start
 
-## Stay in touch
+```
+You should be able to see your instance at https://localhost:3000
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Deploy
+Run the next command to deploy your project to your AWS account
+```
 
-## License
+$ serverless deploy
 
-Nest is [MIT licensed](LICENSE).
+```
+Take into consideration that you are deploying your project based on your AWS CLI configuration (AWS AccessKey, AWS SecretKey, and AWS Region). 
+
