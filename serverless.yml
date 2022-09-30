@@ -8,9 +8,9 @@ provider:
   stage: dev
   name: aws
   runtime: nodejs14.x  
-  environment:
-    IS_OFFLINE: false
+  environment:    
     STUDENTS_TABLE_NAME: ${self:custom.studentsTable.name}
+    CONFIGURATION_TABLE_NAME: ${self:custom.configurationTable.name}
     DYNAMODB_ENDPOINT: ${self:custom.endpoints.dynamodbUrl}
   iamRoleStatements:
     - Effect: Allow
@@ -23,6 +23,7 @@ provider:
         - dynamodb:DeleteItem
       Resource: 
         - ${self:custom.studentsTable.arn}
+        - ${self:custom.configurationTable.arn}
 
 functions:
   students: 
@@ -45,6 +46,21 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+    configurationTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.configurationTable.name}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+package:
+  patterns:
+    - '!.dynamodb/**'
 
 custom:
   optimize:
@@ -52,6 +68,9 @@ custom:
   studentsTable:
     name: ${self:provider.stage}-students
     arn: !GetAtt studentsTable.Arn
+  configurationTable:
+    name: ${self:provider.stage}-configuration
+    arn: !GetAtt configurationTable.Arn
   dynamodb:
     stages:
       - ${self:provider.stage}

@@ -8,12 +8,11 @@ export class AuthMiddleware implements NestMiddleware {
     passport.authenticate('headerapikey', {
       session: false,
       failureRedirect: '/api/unauthorized'
-    }, (value: any) => {
-      // Si la autenticación fué correcta procede con la solicitud: next();
+    }, async (promiseValue: any) => {
+      const value = await promiseValue;
       if (value) {
         next();
       }
-      // En caso contrario retorna un error de autorización
       else {
         throw new UnauthorizedException();
       }

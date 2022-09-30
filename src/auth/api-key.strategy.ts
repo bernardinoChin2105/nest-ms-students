@@ -16,7 +16,7 @@ export class ApiKeyStrategy extends PassportStrategy(HeaderAPIKeyStrategy) {
             false,
             (apikey: string, done: any) => {
                 const keyExists = this.authService.validateApiKey(apikey);
-                return done(!!keyExists);
+                return done(keyExists);
             }
         );
     }
